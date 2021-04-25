@@ -42,9 +42,10 @@ class ManejadorAlumno:
     #Busca alumno para agregar nuevo
     def buscarAlumnoIgualoAnterior(self, reg):
         for indice, unAlumno in enumerate(self.__lista):
-            print(indice)
             if reg >= unAlumno.getRegistro():
-                break
+                break  
+        if reg < unAlumno.getRegistro():
+            indice += 1
         return(indice)
 
     #Elimina un alumno segun indice encontrado       
@@ -70,10 +71,7 @@ class ManejadorAlumno:
             if self.buscarAlumno(reg) == None:
                 unAlumno = Alumno(nom,ap,dni,int(reg))        
                 posicion = self.buscarAlumnoIgualoAnterior(int(reg))
-                if posicion < (len(self.__lista)-1):
-                    self.__lista.insert(posicion, unAlumno)
-                else: #El alumno debe agregarse al final
-                    self.__lista.append(unAlumno)
+                self.__lista.insert(posicion, unAlumno)
                 print("El alumno se inserto en la posicion {0}".format(posicion))
             else:
                 print('El numero de registro ya se encuentra registrado en el archivo.')
